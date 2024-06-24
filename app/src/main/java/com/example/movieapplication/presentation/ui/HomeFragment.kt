@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "Failed to load movies")
             }
         })
-
         movieViewModel.getMovieNowPlaying()
         return binding.root
     }

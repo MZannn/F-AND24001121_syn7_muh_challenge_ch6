@@ -1,7 +1,7 @@
-package com.example.movieapplication.api
+package com.example.movieapplication.data.remote
 
+import com.example.movieapplication.ApiKey
 import com.example.movieapplication.common.Constants.BASE_URL
-import com.example.movieapplication.data.remote.ApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

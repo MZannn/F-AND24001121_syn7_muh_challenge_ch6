@@ -1,4 +1,4 @@
-package com.example.movieapplication.domain.db.dao
+package com.example.movieapplication.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

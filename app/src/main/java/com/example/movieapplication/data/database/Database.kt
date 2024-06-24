@@ -1,10 +1,10 @@
-package com.example.movieapplication.domain.db
+package com.example.movieapplication.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.movieapplication.domain.db.dao.UserDao
+import com.example.movieapplication.data.database.dao.UserDao
 import com.example.movieapplication.domain.model.User
 
 @Database(entities = [User::class], version = 1, exportSchema = false)

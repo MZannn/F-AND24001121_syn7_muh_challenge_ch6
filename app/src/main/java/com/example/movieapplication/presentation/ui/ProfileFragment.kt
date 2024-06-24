@@ -20,7 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.example.movieapplication.BlurWorker
+import com.example.movieapplication.worker.BlurWorker
 import com.example.movieapplication.databinding.FragmentProfileBinding
 import com.example.movieapplication.domain.model.User
 import com.example.movieapplication.presentation.viewModel.AuthViewModel

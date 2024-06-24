@@ -9,10 +9,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.domain.model.response.Result
+import com.example.movieapplication.domain.model.Movie
+
 class MovieAdapter(
-    private var list: List<Result>,
-    private val onClick: (Result) -> Unit
+    private var list: List<Movie>,
+    private val onClick: (Movie) -> Unit
 ) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

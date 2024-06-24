@@ -1,11 +1,12 @@
 package com.example.movieapplication.di
 
-import com.example.movieapplication.api.ApiClient
-import com.example.movieapplication.data.remote.RemoteDataSource
-import com.example.movieapplication.domain.db.UserDatabase
-import com.example.movieapplication.helper.MyDataStore
+import com.example.movieapplication.data.remote.ApiClient
+import com.example.movieapplication.data.repository.MovieRepositoryImpl
+import com.example.movieapplication.data.database.UserDatabase
+import com.example.movieapplication.data.local.LocalDataStore
 import com.example.movieapplication.domain.repository.MovieRepository
 import com.example.movieapplication.domain.repository.UserRepository
+import com.example.movieapplication.domain.usecase.MovieUseCase
 import com.example.movieapplication.presentation.viewModel.AuthViewModel
 import com.example.movieapplication.presentation.viewModel.MovieViewModel
 import org.koin.android.ext.koin.androidContext
@@ -17,14 +18,13 @@ object AppModule {
     val dataModule
         get() = module {
             single { ApiClient.create() }
-            single { MyDataStore(get()) }
+            single { LocalDataStore(get()) }
             single {
                 UserDatabase.getInstance(androidContext()).userDao
             }
-            factory { RemoteDataSource(get()) }
+            factory<MovieRepository>{MovieRepositoryImpl(get())}
             factory { UserRepository(get(), get()) }
-            factory { MovieRepository(get()) }
-
+            factory { MovieUseCase(get()) }
 
         }
 

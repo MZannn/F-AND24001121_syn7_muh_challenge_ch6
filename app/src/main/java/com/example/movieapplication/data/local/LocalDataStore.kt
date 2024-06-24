@@ -1,4 +1,4 @@
-package com.example.movieapplication.helper
+package com.example.movieapplication.data.local
 
 import android.content.Context
 import android.util.Log
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-class MyDataStore(val context: Context) {
+class LocalDataStore(val context: Context) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_prefs")
     private val USER_KEY = stringPreferencesKey("user_key") //null
     private val IS_LOGIN_KEY = booleanPreferencesKey("is_login_key") //false

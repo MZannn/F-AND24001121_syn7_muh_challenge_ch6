@@ -1,4 +1,4 @@
-package com.example.movieapplication.api
+package com.example.movieapplication
 
 object ApiKey {
     const val apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOTcxMDY2Yjk2ZDMxZWE0YTg2NmUyYjk4NDMzYjg5YyIsIm5iZiI6MTcxOTEyOTc5Mi41NTMxMjYsInN1YiI6IjY2M2Q4ZTlhZTBkNDdhNjc3YzMwNzQ3MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IbEwpPfRvKZVxLM10NFv6Oq7cScPmoSZt2Bl9JUwLGc"

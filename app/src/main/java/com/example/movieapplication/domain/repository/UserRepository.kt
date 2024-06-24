@@ -1,7 +1,7 @@
 package com.example.movieapplication.domain.repository
 
-import com.example.movieapplication.domain.db.dao.UserDao
-import com.example.movieapplication.helper.MyDataStore
+import com.example.movieapplication.data.database.dao.UserDao
+import com.example.movieapplication.data.local.LocalDataStore
 import com.example.movieapplication.domain.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -9,20 +9,20 @@ import kotlinx.coroutines.flow.flow
 
 class UserRepository(
     private val userDao: UserDao,
-    private val myDataStore: MyDataStore
+    private val localDataStore: LocalDataStore
 ) {
 
-    val userFlow: Flow<User?> = myDataStore.getUser()
+    val userFlow: Flow<User?> = localDataStore.getUser()
     fun register(user: User) {
         userDao.insert(user)
     }
 
     suspend fun saveUser(user: User) {
-        myDataStore.setUserLogin(user)
+        localDataStore.setUserLogin(user)
     }
 
     suspend fun clearUser() {
-        myDataStore.clearUser()
+        localDataStore.clearUser()
     }
 
     suspend fun getUserById(id: Int): Flow<User?> {
@@ -48,6 +48,6 @@ class UserRepository(
     }
 
      suspend fun getLogin(): Boolean {
-        return myDataStore.getLogin().first()
+        return localDataStore.getLogin().first()
     }
 }

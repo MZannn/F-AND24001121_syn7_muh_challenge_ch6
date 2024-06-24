@@ -1,4 +1,4 @@
-package com.example.movieapplication.domain.model.response
+package com.example.movieapplication.data.remote.response
 
 data class Dates(
     val maximum: String,

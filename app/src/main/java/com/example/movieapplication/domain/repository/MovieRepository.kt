@@ -1,9 +1,10 @@
 package com.example.movieapplication.domain.repository
 
-import com.example.movieapplication.data.remote.RemoteDataSource
+import com.example.movieapplication.data.remote.response.MovieDetailResponse
+import com.example.movieapplication.data.remote.response.MovieResponse
 
-class MovieRepository(private val remoteDataSource: RemoteDataSource) {
+interface MovieRepository {
 
-        suspend fun getMovieNowPlaying() = remoteDataSource.getMovieNowPlaying()
-        suspend fun getMovieDetail(query: String) = remoteDataSource.getMovieDetail(query)
+    suspend fun getMovieNowPlaying(): MovieResponse
+    suspend fun getMovieDetail(query: String): MovieDetailResponse
 }

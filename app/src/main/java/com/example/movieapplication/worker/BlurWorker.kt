@@ -1,4 +1,4 @@
-package com.example.movieapplication
+package com.example.movieapplication.worker
 
 import android.content.Context
 import android.graphics.Bitmap
