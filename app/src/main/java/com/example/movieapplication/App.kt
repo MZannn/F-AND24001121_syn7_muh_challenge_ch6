@@ -3,11 +3,8 @@ package com.example.movieapplication
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import com.example.movieapplication.KoinModule.dataModule
-import com.example.movieapplication.KoinModule.uiModule
+import com.example.movieapplication.di.AppModule.dataModule
+import com.example.movieapplication.di.AppModule.uiModule
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

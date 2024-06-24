@@ -6,10 +6,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.movieapplication.model.User
+import com.example.movieapplication.domain.model.User
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -21,16 +20,6 @@ class MyDataStore(val context: Context) {
     private val IS_LOGIN_KEY = booleanPreferencesKey("is_login_key") //false
     private val gson = Gson()
 
-    suspend fun setLogin(_isLogin: Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[IS_LOGIN_KEY] = _isLogin
-        }
-    }
-
-    suspend fun getPreferences(context: Context): Flow<Preferences> {
-        return context.dataStore.data
-    }
-
 
     fun getLogin(): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
@@ -38,7 +27,7 @@ class MyDataStore(val context: Context) {
         }
     }
 
-    suspend fun saveUser(user: User) {
+    suspend fun setUserLogin(user: User) {
         val json = gson.toJson(user)
         context.dataStore.edit { preferences ->
             preferences[USER_KEY] = json

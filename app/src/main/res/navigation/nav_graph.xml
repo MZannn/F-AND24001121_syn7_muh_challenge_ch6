@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.movieapplication.view.LoginFragment"
+        android:name="com.example.movieapplication.presentation.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.movieapplication.view.RegisterFragment"
+        android:name="com.example.movieapplication.presentation.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.movieapplication.view.HomeFragment"
+        android:name="com.example.movieapplication.presentation.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.example.movieapplication.view.DetailMovieFragment"
+        android:name="com.example.movieapplication.presentation.ui.DetailMovieFragment"
         android:label="fragment_detail_movie"
         tools:layout="@layout/fragment_detail_movie" >
         <argument android:name="id"
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.movieapplication.view.ProfileFragment"
+        android:name="com.example.movieapplication.presentation.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
