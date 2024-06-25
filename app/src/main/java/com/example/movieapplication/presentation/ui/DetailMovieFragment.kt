@@ -37,7 +37,7 @@ class DetailMovieFragment : Fragment() {
                 binding.tvTitle.text = it.title
                 binding.tvOverview.text = it.overview
                 Glide.with(binding.root)
-                    .load("https://image.tmdb.org/t/p/w500${it.poster_path}")
+                    .load("https://image.tmdb.org/t/p/w500${it.posterPath}")
                     .into(binding.imageDetailMovie)
                 binding.imageDetailMovie.background = null
             }

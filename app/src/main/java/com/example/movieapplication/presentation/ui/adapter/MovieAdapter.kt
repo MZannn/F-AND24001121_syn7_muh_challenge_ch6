@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
+import com.example.movieapplication.data.remote.response.Result
 import com.example.movieapplication.domain.model.Movie
 
 class MovieAdapter(
@@ -34,7 +35,7 @@ class MovieAdapter(
         holder.title.text = item.title
         holder.content.text = item.overview
         Glide.with(holder.itemView.context)
-            .load("https://image.tmdb.org/t/p/w500${item.poster_path}")
+            .load("https://image.tmdb.org/t/p/w500${item.posterPath}")
             .into(holder.image)
         holder.cardView.setOnClickListener {
             onClick(item)
@@ -44,5 +45,9 @@ class MovieAdapter(
 
     override fun getItemCount(): Int {
         return list.size
+    }
+    fun updateData(newList: List<Movie>) {
+        list = newList
+        notifyDataSetChanged()
     }
 }

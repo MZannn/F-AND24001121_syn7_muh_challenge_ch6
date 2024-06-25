@@ -20,7 +20,7 @@ import org.koin.android.ext.android.inject
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private val authViewModel:AuthViewModel by inject()
+    private val authViewModel: AuthViewModel by inject()
     private val movieViewModel: MovieViewModel by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
 
 
         lifecycleScope.launch {
-            authViewModel.userFlow.collect{
+            authViewModel.userFlow.collect {
                 binding.welcomeUsername.text = "Welcome, ${it?.username}!"
             }
         }
@@ -40,21 +40,16 @@ class HomeFragment : Fragment() {
         }
 
         val recyclerView = binding.rvMovies
-        movieViewModel.movieResponse.observe(viewLifecycleOwner, Observer { response ->
-            response?.let {
-                val adapter = MovieAdapter(it.results) { movie ->
-                    Log.d("HomeFragment", "Movie clicked: ${movie.title}")
-                    val action = HomeFragmentDirections
-                        .actionHomeFragmentToDetailMovieFragment(movie.id.toString())
-                    findNavController().navigate(action)
-                }
-                recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = adapter
-            } ?: run {
-                Log.e("HomeFragment", "Failed to load movies")
+        movieViewModel.movieResponse.observe(viewLifecycleOwner, Observer {
+            val adapter = MovieAdapter(it) { movie ->
+                Log.d("HomeFragment", "Movie clicked: ${movie.title}")
+                val action = HomeFragmentDirections
+                    .actionHomeFragmentToDetailMovieFragment(movie.id.toString())
+                findNavController().navigate(action)
             }
+            recyclerView.adapter = adapter
         })
-        movieViewModel.getMovieNowPlaying()
+        recyclerView.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 

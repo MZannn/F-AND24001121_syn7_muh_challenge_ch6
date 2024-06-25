@@ -1,11 +1,13 @@
 package com.example.movieapplication.data.remote.response
 
-import com.example.movieapplication.domain.model.Movie
+import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
     val dates: Dates,
     val page: Int,
-    val results: List<Movie>,
-    val total_pages: Int,
-    val total_results: Int
+    val results: List<Result>,
+    @SerializedName("total_pages")
+    val totalPages: Int,
+    @SerializedName("total_results")
+    val totalResults: Int
 )

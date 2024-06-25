@@ -2,6 +2,7 @@ package com.example.movieapplication.data.remote
 
 import com.example.movieapplication.data.remote.response.MovieDetailResponse
 import com.example.movieapplication.data.remote.response.MovieResponse
+import com.example.movieapplication.domain.model.Movie
 import retrofit2.http.GET
 import retrofit2.http.Path
 

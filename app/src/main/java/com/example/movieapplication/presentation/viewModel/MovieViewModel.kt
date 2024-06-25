@@ -5,39 +5,58 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapplication.common.Resource
 import com.example.movieapplication.data.remote.response.MovieDetailResponse
 import com.example.movieapplication.data.remote.response.MovieResponse
+import com.example.movieapplication.domain.model.Movie
 import com.example.movieapplication.domain.usecase.MovieUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
-    private var _movieDetailResponse = MutableLiveData<MovieDetailResponse?>()
-    val movieDetailResponse: MutableLiveData<MovieDetailResponse?> get() = _movieDetailResponse
-    private val _movieResponse = MutableLiveData<MovieResponse?>()
-    val movieResponse: LiveData<MovieResponse?> = _movieResponse
+    private var _movieDetailResponse = MutableLiveData<Movie?>()
+    val movieDetailResponse: MutableLiveData<Movie?> get() = _movieDetailResponse
+    private val _movieResponse = MutableLiveData<List<Movie>>()
+    val movieResponse: LiveData<List<Movie>> = _movieResponse
 
-    fun getMovieNowPlaying() {
+     private fun getNowPlayingMovies() {
         viewModelScope.launch {
-            try {
-                val response = movieUseCase.getMovieNowPlaying()
-                _movieResponse.postValue(response)
-            } catch (e: Exception) {
-                _movieResponse.postValue(null)
-                Log.e("MovieViewModel", "Failed to fetch movie data", e)
-
+            movieUseCase().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _movieResponse.value = result.data ?: emptyList()
+                    }
+                    is Resource.Error -> {
+                        Log.e("MovieViewModel", "getNowPlayingMovies: ${result.message}")
+                    }
+                    is Resource.Loading -> {
+                        Log.d("MovieViewModel", "getNowPlayingMovies: Loading")
+                    }
+                    else -> {}
+                }
             }
         }
     }
-
     fun getMovieDetail(id: String) {
         viewModelScope.launch {
-            try {
-                val response = movieUseCase.getMovieDetail(id)
-                _movieDetailResponse.postValue(response)
-            } catch (e: Exception) {
-                _movieDetailResponse.postValue(null)
+            movieUseCase(id).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _movieDetailResponse.value = result.data
+                    }
+                    is Resource.Error -> {
+                        Log.e("MovieViewModel", "getMovieDetail: ${result.message}")
+                    }
+                    is Resource.Loading -> {
+                        Log.d("MovieViewModel", "getMovieDetail: Loading")
+                    }
+                    else -> {}
+                }
             }
         }
     }
-
+    init {
+        getNowPlayingMovies()
+    }
 }

@@ -1,8 +1,12 @@
 package com.example.movieapplication.data.remote.response
 
+import com.example.movieapplication.domain.model.Movie
+import com.google.gson.annotations.SerializedName
+
 data class MovieDetailResponse(
     val adult: Boolean,
-    val backdrop_path: String,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
     val belongs_to_collection: BelongsToCollection,
     val budget: Int,
     val genres: List<Genre>,
@@ -14,7 +18,8 @@ data class MovieDetailResponse(
     val original_title: String,
     val overview: String,
     val popularity: Double,
-    val poster_path: String,
+    @SerializedName("poster_path")
+    val posterPath: String,
     val production_companies: List<ProductionCompany>,
     val production_countries: List<ProductionCountry>,
     val release_date: String,
@@ -28,3 +33,12 @@ data class MovieDetailResponse(
     val vote_average: Double,
     val vote_count: Int
 )
+
+fun MovieDetailResponse.toMovie(): Movie {
+    return Movie(
+        posterPath = posterPath,
+        id = id,
+        overview = overview,
+        title = title
+    )
+}
