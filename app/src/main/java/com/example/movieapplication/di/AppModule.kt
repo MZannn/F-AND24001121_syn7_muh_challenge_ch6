@@ -8,6 +8,7 @@ import com.example.movieapplication.domain.repository.MovieRepository
 import com.example.movieapplication.domain.repository.UserRepository
 import com.example.movieapplication.domain.usecase.MovieUseCase
 import com.example.movieapplication.presentation.viewModel.AuthViewModel
+import com.example.movieapplication.presentation.viewModel.DetailMovieViewModel
 import com.example.movieapplication.presentation.viewModel.MovieViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,6 +34,7 @@ object AppModule {
         get() = module {
             viewModel { AuthViewModel(get()) }
             viewModel { MovieViewModel(get()) }
+            viewModel { DetailMovieViewModel(get()) }
         }
 
 }

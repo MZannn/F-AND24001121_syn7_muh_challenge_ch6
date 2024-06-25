@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.movieapplication.databinding.FragmentDetailMovieBinding
+import com.example.movieapplication.presentation.viewModel.DetailMovieViewModel
 import com.example.movieapplication.presentation.viewModel.MovieViewModel
 import org.koin.android.ext.android.inject
 
@@ -24,7 +25,7 @@ class DetailMovieFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentDetailMovieBinding
     private val args: DetailMovieFragmentArgs by navArgs()
-    private val viewModel: MovieViewModel by inject()
+    private val viewModel: DetailMovieViewModel by inject()
 
 
     override fun onCreateView(

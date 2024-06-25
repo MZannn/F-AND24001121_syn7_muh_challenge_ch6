@@ -15,12 +15,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
-    private var _movieDetailResponse = MutableLiveData<Movie?>()
-    val movieDetailResponse: MutableLiveData<Movie?> get() = _movieDetailResponse
     private val _movieResponse = MutableLiveData<List<Movie>>()
     val movieResponse: LiveData<List<Movie>> = _movieResponse
 
-     private fun getNowPlayingMovies() {
+    private fun getNowPlayingMovies() {
         viewModelScope.launch {
             movieUseCase().collect { result ->
                 when (result) {
@@ -38,24 +36,7 @@ class MovieViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
             }
         }
     }
-    fun getMovieDetail(id: String) {
-        viewModelScope.launch {
-            movieUseCase(id).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        _movieDetailResponse.value = result.data
-                    }
-                    is Resource.Error -> {
-                        Log.e("MovieViewModel", "getMovieDetail: ${result.message}")
-                    }
-                    is Resource.Loading -> {
-                        Log.d("MovieViewModel", "getMovieDetail: Loading")
-                    }
-                    else -> {}
-                }
-            }
-        }
-    }
+
     init {
         getNowPlayingMovies()
     }
