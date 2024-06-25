@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapplication.common.Resource
-import com.example.movieapplication.data.remote.response.MovieDetailResponse
-import com.example.movieapplication.data.remote.response.MovieResponse
-import com.example.movieapplication.domain.model.Movie
-import com.example.movieapplication.domain.usecase.MovieUseCase
+import com.example.common.Resource
+import com.example.domain.model.Movie
+import com.example.domain.usecase.MovieUseCase
+
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

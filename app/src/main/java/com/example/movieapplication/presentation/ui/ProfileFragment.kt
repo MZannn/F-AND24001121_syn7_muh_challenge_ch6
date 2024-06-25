@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +21,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.example.domain.model.User
 import com.example.movieapplication.worker.BlurWorker
 import com.example.movieapplication.databinding.FragmentProfileBinding
-import com.example.movieapplication.domain.model.User
+
 import com.example.movieapplication.presentation.viewModel.AuthViewModel
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -33,7 +35,7 @@ import java.io.FileOutputStream
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val authViewModel: AuthViewModel by inject()
-    private lateinit var userPhoto: String
+    private var userPhoto: String? = null
     private val REQUEST_CODE = 100
 
     override fun onCreateView(
@@ -52,12 +54,15 @@ class ProfileFragment : Fragment() {
                     binding.etAddress.setText(user.address)
                     binding.etBirthdate.setText(user.birthdate)
                     binding.etFullname.setText(user.fullname)
-                    user.photo?.let {
-                        binding.imageProfile.setImageBitmap(Base64.decode(it, Base64.DEFAULT).let { bytes ->
-                            BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                        })
-                        binding.imageProfile.background = null
+                    if (user.photo != "") {
+                        user.photo?.let {
+                            binding.imageProfile.setImageBitmap(Base64.decode(it, Base64.DEFAULT).let { bytes ->
+                                BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            })
+                            binding.imageProfile.background = null
+                        }
                     }
+
                 }
             }
         }
@@ -70,7 +75,7 @@ class ProfileFragment : Fragment() {
                 fullname = binding.etFullname.text.toString(),
                 birthdate = binding.etBirthdate.text.toString(),
                 address = binding.etAddress.text.toString(),
-                photo = userPhoto,
+                photo = userPhoto ?: null,
                 email = "",
                 password = ""
             )
@@ -80,7 +85,7 @@ class ProfileFragment : Fragment() {
                     updatedUser.fullname ?: "",
                     updatedUser.birthdate ?: "",
                     updatedUser.address ?: "",
-                    updatedUser.photo?:"",
+                    updatedUser.photo?:null,
                     updatedUser.id ?: 0
                 )
             }

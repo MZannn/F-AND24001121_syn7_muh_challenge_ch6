@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.domain.model.User
 import com.example.movieapplication.databinding.FragmentRegisterBinding
-import com.example.movieapplication.domain.model.User
+
 import com.example.movieapplication.presentation.viewModel.AuthViewModel
 import org.koin.android.ext.android.inject
 

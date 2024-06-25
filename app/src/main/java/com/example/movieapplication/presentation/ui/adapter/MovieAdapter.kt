@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.domain.model.Movie
 import com.example.movieapplication.R
-import com.example.movieapplication.data.remote.response.Result
-import com.example.movieapplication.domain.model.Movie
+
 
 class MovieAdapter(
     private var list: List<Movie>,

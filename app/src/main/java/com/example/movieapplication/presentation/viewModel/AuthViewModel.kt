@@ -1,11 +1,12 @@
 package com.example.movieapplication.presentation.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapplication.domain.model.User
-import com.example.movieapplication.domain.repository.UserRepository
+import com.example.domain.model.User
+import com.example.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
     ) {
         viewModelScope.launch {
             val currentUser = userRepository.getUserById(id).firstOrNull()
+            Log.d("AuthViewModel", "updateUser: ${currentUser?.photo == "" }")
             if (currentUser != null) {
                 val updatedUser = currentUser.copy(
                     username = username,
